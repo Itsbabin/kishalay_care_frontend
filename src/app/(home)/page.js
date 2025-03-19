@@ -15,8 +15,8 @@ export default function Home() {
         />
       </div>
       <div className="banner_line w-screen h-3 "></div>
-      <div className="w-screen max-h-max flex justify-center gap-32 max-xl:flex-wrap items-center py-5 px-36 mb-36">
-        <div className="relative h-96 w-[600px] mt-20">
+      <div className="w-screen max-h-max flex justify-center gap-32 max-md:gap-2 max-xl:flex-wrap items-center max-md:p-0 py-5 max-md:px-6 px-36 mb-36">
+        <div className="relative h-96 max-md:h-40 max-md:w-80 w-[600px] max-md:mt-5 mt-20">
           <Image
             src='/home/lady.jpg'
             fill={true}
@@ -25,11 +25,11 @@ export default function Home() {
             className=' object-contain'
           ></Image>
         </div>
-        <div className="h-[340px] w-[500px]">
+        <div className="h-[340px] w-[500px] max-md:h-max max-md:w-full max-md:px-8">
           <div className="happiness_text">
             Your Happiness Your Choice
           </div>
-          <div className="flex justify-baseline items-center bg-white w-max p-2 gap-3">
+          <div className="flex justify-baseline items-center bg-white w-max max-md:flex-wrap max-md:w-full p-2 gap-3">
             <div className="text-4xl font-black" style={{ color: "#000000" }}>
               About
             </div>
@@ -44,13 +44,13 @@ export default function Home() {
           <div className="text-slate-900 text-lg font-medium  ">
             Located in the heart of Barasat Village, Nadia, our facility is easily accessible and operates five days a week, from 8:00 AM to 8:00 PM, ensuring onvenience for all our clients. Our dedicated team is committed to prioritizing customer  well-being and satisfaction. Whether you need assistance or have  inquiries, we are here to help.
           </div>
-          <div className=" flex justify-baseline items-center flex-wrap w-full">
-            <div className=" w-1/2 flex text-xl font-semibold items-center gap-2 p-1.5"><span className="dot"></span>  Nutracetical</div>
-            <div className=" w-1/2 flex text-xl font-semibold items-center gap-2 p-1.5"><span className="dot"></span>Personal care</div>
-            <div className=" w-1/2 flex text-xl font-semibold items-center gap-2 p-1.5"><span className="dot"></span>Hearbal</div>
-            <div className=" w-1/2 flex text-xl font-semibold items-center gap-2 p-1.5"><span className="dot"></span>Home Care</div>
-            <div className=" w-1/2 flex text-xl font-semibold items-center gap-2 p-1.5"><span className="dot"></span>Beauty Care</div>
-            <div className=" w-1/2 flex text-xl font-semibold items-center gap-2 p-1.5"><span className="dot"></span>Auto Care</div>
+          <div className=" flex justify-baseline items-center max-md:mt-3 flex-wrap w-full">
+            <div className=" w-1/2 max-md:text-sm flex text-xl font-semibold items-center gap-2 p-1.5"><span className="dot"></span>  Nutracetical</div>
+            <div className=" w-1/2 max-md:text-sm flex text-xl font-semibold items-center gap-2 p-1.5"><span className="dot"></span>Personal care</div>
+            <div className=" w-1/2 max-md:text-sm flex text-xl font-semibold items-center gap-2 p-1.5"><span className="dot"></span>Hearbal</div>
+            <div className=" w-1/2 max-md:text-sm flex text-xl font-semibold items-center gap-2 p-1.5"><span className="dot"></span>Home Care</div>
+            <div className=" w-1/2 max-md:text-sm flex text-xl font-semibold items-center gap-2 p-1.5"><span className="dot"></span>Beauty Care</div>
+            <div className=" w-1/2 max-md:text-sm flex text-xl font-semibold items-center gap-2 p-1.5"><span className="dot"></span>Auto Care</div>
 
           </div>
           <div className="w-full h-10 flex justify-center items-center">
@@ -58,7 +58,7 @@ export default function Home() {
           </div>
         </div>
       </div>
-      <div className="h-10 text-3xl font-extrabold text-gray-900 text-center mt-10 mb-8">
+      <div className="h-10  text-3xl font-extrabold text-gray-900 text-center max-md:mt-0 mt-10 mb-8">
         Discover Our Products
       </div>
       <div className="flex justify-center items-center flex-wrap gap-6 py-10">
@@ -130,13 +130,13 @@ export default function Home() {
         </div>
       </div>
       <div className="w-full h-96 flex justify-center items-center">
-        <div className="w-full h-60 px-24 flex justify-center max-xl:flex-wrap max-xl:mt-8 max-xl:h-[400px] gap-16 items-center" style={{ backgroundColor: '#B3EBFF' }}>
-          <div className="w-[600px] flex flex-col justify-center ml-16 mt-4 items-start">
+        <div className="w-full h-60 max-md:px-8 px-24 flex justify-center max-xl:flex-wrap max-xl:mt-8 max-xl:h-[400px] gap-16 items-center" style={{ backgroundColor: '#B3EBFF' }}>
+          <div className="w-[600px] max-md:w-full flex flex-col justify-center max-md:ml-2 ml-16 mt-4 items-start">
             <div className="text-4xl font-semibold" style={{ color: '#00678C' }}>
               All About Our Product
             </div>
             <div className="h-1.5 w-36" style={{ backgroundColor: '#00DDFF' }}></div>
-            <div className="text-[#004856]">Lorem Ipsum is simply dummy text of the printing and  typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of  type and scrambled it to make a type specimen book. It has survived not  only five centuries, but also the leap into electronic typesetting,  remaining essentially unchanged.</div>
+            <div className="text-[#004856] max-md:w-full">Lorem Ipsum is simply dummy text of the printing and  typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of  type and scrambled it to make a type specimen book. It has survived not  only five centuries, but also the leap into electronic typesetting,  remaining essentially unchanged.</div>
             <div className="w-full h-10 flex justify-center items-center">
               <Link href='/AboutUs' className="readmore2">Read More</Link>
             </div>

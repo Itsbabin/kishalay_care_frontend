@@ -1,5 +1,6 @@
 import Navbar from "@/component/home/Navbar";
 import "../globals.css";
+import LoadingScreen from "@/component/LoadingScreen";
 
 
 
@@ -14,6 +15,7 @@ export default function RootLayout({ children }) {
       <body>
         <Navbar/>
         <div className="w-screen h-20"></div>
+        <LoadingScreen/>
         {children}
       </body>
     </html>
