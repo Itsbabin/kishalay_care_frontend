@@ -16,8 +16,8 @@ export default function DashBoard() {
 
   return (
     <>
-      <div className="flex max-md:flex-col-reverse items-start justify-baseline gap-4">
-        <div className="h-screen max-md:h-full max-w-[900px] max-md:w-full overflow-x-hidden">
+      <div className="flex max-md:flex-col-reverse items-start justify-baseline gap-4 pb-4">
+        <div className="h-screen max-md:h-full max-w-[900px] max-md:w-full max-md:overflow-x-hidden">
           <div className="max-w-6xl mx-auto grid grid-cols-2 md:grid-cols-4 gap-4">
             <div className="bg-white p-4 rounded-lg shadow-md text-center">
               <div className="relative h-25 w-25 mx-auto">
@@ -90,9 +90,19 @@ export default function DashBoard() {
                 Revenue VS Profit Margin Analysis
               </p>
             </div>
-            <div className="bg-white p-4 rounded-lg shadow-md text-center">
+            <div className="bg-white p-4 flex justify-center items-center flex-col rounded-lg shadow-md text-center">
+                
               <p className="text-gray-600">Direct Hand Count</p>
               <p className="text-2xl font-bold">{user?.juniors.length}</p>
+              <div className="relative h-35 w-35 mx-auto">
+                <Image
+                  src="/profile/dashboard/chain.png"
+                  fill={true}
+                  sizes="( h-full)"
+                  alt="team"
+                  className=" object-contain"
+                />
+              </div>
             </div>
           </div>
 
@@ -130,7 +140,7 @@ export default function DashBoard() {
             <div className="bg-white h-full p-4 rounded-lg shadow-md text-center items-center sm:col-span-2">
             <div className="relative h-30 w-30 mx-auto">
                 <Image
-                  src="/profile/dashboard/ProfileImage.jpg"
+                  src={`${user?.profile_pic_URL ||"/profile/dashboard/ProfileImage.jpg"}`}
                   fill={true}
                   sizes="( h-full)"
                   alt="team"
@@ -155,9 +165,9 @@ export default function DashBoard() {
               </div>
               <p className="font-bold text-gray-700">Events</p>
               <p className="text-gray-600">March</p>
-              <p className="text-gray-700 mt-2 text-center text-sm">The next level is yours 
+              <p className=" mt-2 text-center font-semibold  text-sm text-green-600">The next level is yours 
               to achieve!</p>
-                <p className="text-gray-500">Rank-{user?.rank ? user?.rank : "-"}</p>
+                <p className="text-gray-500 md:pb-2">Rank-{user?.rank ? user?.rank : "-"}</p>
             </div>
             </div>
            

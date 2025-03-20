@@ -1,11 +1,13 @@
 "use client";
 import { SetShowebleHomeAdmin0 } from "@/app/(admin)/admin/page";
+import Cookies from "js-cookie";
 import Image from "next/image";
 import Link from 'next/link'
+import { useRouter } from "next/navigation";
 import React, { useState } from "react";
 
 export default function NavAdmin() {
-
+  const router =  useRouter()
   return (
     <>
       <nav className="fixed top-0 left-0 bg-[#e4f8ff] shadow-lg z-40">
@@ -26,12 +28,21 @@ export default function NavAdmin() {
               />
             </div>
           </Link>
-          <Link href={'/login'} className="flex justify-between items-center space-x-2 md:mr-0 mr-7">
-          <span>Login </span>
+          <div  className="flex justify-between items-center space-x-2 md:mr-0 mr-7 cursor-pointer" onClick={() =>{
+            let confirmation = confirm("Are you want to Logout ? ")
+           
+           if (confirmation) {
+             Cookies.remove('user', { path: '/' })
+             Cookies.remove('jwt', { path: '/' })
+             router.push('/')
+            }
+
+          }}>
+          <span>Log out </span>
         <div className="h-8 w-8 ">
-          <img src="/home/nav/8847419.png" alt="login" />
+          <img src="/settings.png" alt="login" />
         </div>
-          </Link>
+          </div>
         </div>
         <div
           id="mobile-menu"

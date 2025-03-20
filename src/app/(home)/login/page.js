@@ -10,21 +10,46 @@ import axios from 'axios';
 export default function Login() {
     const [Password, setPassword] = useState("")
   const [userid, setuserid] = useState("")
+  const [loading, setLoading] = useState(false)
 
   const router =  useRouter()
      
   let handelClicked = async () => {
     let valid = parseInt(userid)
     
-    if ((userid[0] === 'k' ) || !isNaN(valid)) {
-      console.log("hello");
+    if (userid.substring(0,4) === 'KCPL') {
+      console.log(userid.substring(0,4));
+      await axios(`${BackendURL}/stalf/login`,{
+        method : 'post',
+        headers: {
+         "Accept": '*/*',
+        'Content-Type': 'application/json',
+        },
+        data : {
+          userid : userid ,
+           password : Password
+        }
+      })
+      .then((result) => {
+        Cookies.set('jwt',result.data.token ,{expires:  3/24, path: '/' })
+        Cookies.set('usertype',"stalf",{expires:  3/24, path: '/' })
+        Cookies.set('user',JSON.stringify(result.data),{expires: 3/24, path: '/' })
+        alert('Login Successfull')
+        router.push('/stalf')
+      })
+      .catch((err) =>{
+        setLoading(false)
+        console.log(err.response?.data.message);
+        alert(err.response?.data.message);
+      })
+    }
+    else if ((userid.substring(0,3) === 'KCC' ) || !isNaN(valid)) {
       
    await axios(`${BackendURL}/user/login`,{
       method : 'post',
       headers: {
         "Accept": '*/*',
-        "Access-Control-Allow-Origin": "*",
-        "Access-Control-Allow-Methods": "GET,PUT,POST,DELETE,PATCH,OPTIONS"
+        'Content-Type': 'application/json',
       },
       data : {
         phone_number : userid ,
@@ -38,19 +63,18 @@ export default function Login() {
       router.push('/profile')
     })
     .catch((err) =>{
-      console.log(err.response.data);
-      alert(err.response.data.message);
+      setLoading(false)
+      console.log(err.response?.data.message);
+        alert(err.response?.data.message);
     })
   }
    else if(isNaN(valid)){
-    console.log("admin");
     
     await axios(`${BackendURL}/admin/login`,{
       method : 'post',
       headers: {
         "Accept": '*/*',
-        "Access-Control-Allow-Origin": "*",
-        "Access-Control-Allow-Methods": "GET,PUT,POST,DELETE,PATCH,OPTIONS"
+        'Content-Type': 'application/json',
       },
       data : {
         phone_number : userid ,
@@ -64,13 +88,17 @@ export default function Login() {
       router.push('/admin')
     })
     .catch((err) =>{
-      console.log(err.response.data);
-      alert(err.response.data.message);
+      setLoading(false)
+      // console.log(err.response.data);
+      alert("Input right credential");
     })
 }
 
   }
   return (
+    <>  {loading ? <div className="fixed inset-0 flex items-center justify-center bg-white/70 z-50">
+      <div className="animate-spin h-12 w-12 border-t-4 border-blue-600 rounded-full"></div>
+    </div> :
     <>
         <div className=" absolute top-0 left-0 -z-10 h-screen w-screen ">
         <Image src="/home/login/coverphoto.jpg"
@@ -92,6 +120,7 @@ export default function Login() {
           <form id="login items" className="flex flex-col justify-center max-md:gap-1 gap-4 items-center bg-[#1F225B] max-md:rounded-b-4xl max-md:w-full max-md:h-3/4  max-md:rounded-r-none rounded-r-4xl h-full w-[55%] py-4"
           onSubmit={(e) => {
             e.preventDefault();
+            setLoading(true)
             handelClicked();
           }}>
                 <div className="text-white text-3xl font-semibold max-md:mb-2 mb-6">Wellcome!</div>
@@ -116,6 +145,8 @@ export default function Login() {
           </form>
         </div>
       </div>
+      </>
+      }
     </>
   )
 }

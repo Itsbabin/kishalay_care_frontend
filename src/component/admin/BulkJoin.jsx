@@ -3,7 +3,7 @@ import React, { useEffect, useState } from "react";
 import * as XLSX from "xlsx";
 import { BackendURL } from "../../../const";
 
-export default function BulkJoin() {
+export default function BulkJoin({setloading}) {
   const [agents, setAgents] = useState([]);
 
   const handleFileUpload = (event) => {
@@ -37,11 +37,11 @@ export default function BulkJoin() {
         town: agent.town,
         district: agent.district,
         state: agent.state,
-        introducer : {
-          id: agent.introducer_id,
-          name: agent.introducer_name
-      }
       };
+      agent.introducer = {
+        id : agent.introducer_id,
+        name : agent.introducer_name
+    }
       delete agent.careof;
       delete agent.address_line_1;
       delete agent.address_line_2;
@@ -61,13 +61,19 @@ export default function BulkJoin() {
   }, [agents]);
 
   let uploadAgents = async () => {
+    setloading(true)
     if (agents.length != 0) {
       axios
         .post(`${BackendURL}/admin/bulkJoin`, { agents })
         .then((res) => {
           console.log(res.data);
+          alert("Successfully user created!")
+          setloading(false)
+          window.location.reload();
         })
         .catch((err) => {
+          alert("Problem occured on user creation !")
+          setloading(false)
           console.log(err);
         });
     }

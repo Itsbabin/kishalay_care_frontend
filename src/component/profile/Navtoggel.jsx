@@ -68,7 +68,8 @@ export default function Navtoggel({ setToggel }) {
           <div
             className="p-1 w-full gap-1 pl-5 flex justify-baseline items-center rounded-lg hover:bg-[#A3E5FF] duration-200"
             onClick={() => {
-              SetShowebleHome0("SearchMember");
+              alert("This portion is under Maintanense")
+              SetShowebleHome0("Maintanense")
               teamitemHeight == "h-0" ? setTeamitemHeight("h-25") : setTeamitemHeight("h-0");
               setToggel("w-[0px]");
             }}
@@ -80,22 +81,7 @@ export default function Navtoggel({ setToggel }) {
         </div>
       </div>
       <div className=""></div>
-      <div
-        className=" mb-3 max-h-max w-[90%] flex justify-baseline pl-8 hover:bg-[#A3E5FF] duration-300 rounded-lg items-center cursor-pointer gap-5"
-        onClick={() => setToggel("w-[0px]")}
-      >
-        <div className="relative h-10 w-8 ">
-          <Image
-            src="/profile/nav/store.png"
-            fill={true}
-            sizes="( h-full)"
-            alt="store"
-            className=" object-contain"
-          />
-        </div>
-        <div className="text-lg font-medium">Online Store</div>
-      </div>
-
+    
       <div
         className=" mb-3 max-h-max w-[90%] flex justify-baseline pl-8 hover:bg-[#A3E5FF] duration-300 rounded-lg items-center cursor-pointer gap-5"
         onClick={() =>{
@@ -116,11 +102,15 @@ export default function Navtoggel({ setToggel }) {
       </div>
       <div
         className=" mb-3 max-h-max w-[90%] flex justify-baseline pl-8 hover:bg-[#A3E5FF] duration-300 rounded-lg items-center cursor-pointer gap-5"
-        onClick={() => setToggel("w-[0px]")}
+        onClick={() => {
+          setToggel("w-[0px]")
+          SetShowebleHome0("Profile")
+        }}
       >
-        <div className="relative h-10 w-8 ">
+        <div className="relative h-10 w-8 "  onClick={() => {
+          }}>
           <Image
-            src="/profile/nav/wallet-5.png"
+            src="/profile/nav/moderator.png"
             fill={true}
             sizes="( h-full)"
             alt="team"
@@ -129,17 +119,36 @@ export default function Navtoggel({ setToggel }) {
         </div>
         <div
           className="text-lg font-medium"
-          onClick={() => {
-            //   setShowebleHome("Profile")
-            setToggel("w-[0px]");
-          }}
+         
         >
           Profile
         </div>
       </div>
       <div
         className=" mb-3 max-h-max w-[90%] flex justify-baseline pl-8 hover:bg-[#A3E5FF] duration-300 rounded-lg items-center cursor-pointer gap-5"
-        onClick={() => setToggel("w-[0px]")}
+        onClick={() => {setToggel("w-[0px]")
+          alert("This portion is under Maintanense")
+          SetShowebleHome0("Maintanense")
+        }}
+      >
+        <div className="relative h-10 w-8 ">
+          <Image
+            src="/profile/nav/store.png"
+            fill={true}
+            sizes="( h-full)"
+            alt="store"
+            className=" object-contain"
+          />
+        </div>
+        <div className="text-lg font-medium">Online Store</div>
+      </div>
+
+      <div
+        className=" mb-3 max-h-max w-[90%] flex justify-baseline pl-8 hover:bg-[#A3E5FF] duration-300 rounded-lg items-center cursor-pointer gap-5"
+        onClick={() => {setToggel("w-[0px]")
+          alert("This portion is under Maintanense")
+          SetShowebleHome0("Maintanense")
+        }}
       >
         <div className="relative h-10 w-8 ">
           <Image

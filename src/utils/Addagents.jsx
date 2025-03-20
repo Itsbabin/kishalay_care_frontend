@@ -36,7 +36,6 @@ export default function AddAgent({setloading}) {
   const [Pronoun, setPronoun] = useState("Mr.");
   const [filePath, setFilePath] = useState("/profile/Joining/upload.png");
   const [file, setFile] = useState(null);
-
   const [otp, setOtp] = useState(null);
   const [inputOTP, setInputOTP] = useState("");
   const [disabled, setDisabled] = useState(false);
@@ -46,7 +45,7 @@ export default function AddAgent({setloading}) {
 
   let controler = new AbortController();
   const signal = controler.signal;
-  const router = useRouter();
+  
   let searchAgent = async () => {
     await axios
       .post(
@@ -71,11 +70,13 @@ export default function AddAgent({setloading}) {
       setFilePath(imageUrl);
     }
   };
+
+  
   let getOtp = async () => {
     let randomSixDigit = Math.floor(100000 + Math.random() * 900000);
     console.log(randomSixDigit);
+    setOtp(`${randomSixDigit}`);
     if (Email) {
-        setOtp(`${randomSixDigit}`);
         await axios.post(`${BackendURL}/otp`,{
             otp : `${randomSixDigit}`,
             email : Email
@@ -95,7 +96,21 @@ export default function AddAgent({setloading}) {
     }
   };
 
+ useEffect(() => {
+    if (timeLeft <= 0) {
+      setDisabled(false);
+      return;
+    }
+
+    const timer = setTimeout(() => {
+      setTimeLeft(timeLeft - 1);
+    }, 1000);     
+
+    return () => clearTimeout(timer);
+  }, [timeLeft]);
+
   useEffect(() => {
+
     if (agentSearchData != "" && agentSearchData != undefined) {
       setSearchResultPosition("flex");
       searchAgent();
@@ -140,7 +155,6 @@ export default function AddAgent({setloading}) {
         };
 
         formData.append("json", JSON.stringify(userData));
-        console.log(FormData);
 
         await axios
           .post(`${BackendURL}/user/singup`, formData, {
@@ -148,12 +162,24 @@ export default function AddAgent({setloading}) {
               "Content-Type": "multipart/form-data",
             },
           })
-          .then((response) => {
-            console.log(response.data);
-            alert("User created successfuly");
-            window.location.reload();
+          .then(async (response) => {
+             await axios.post(`${BackendURL}/confirm`,{
+                      User : response?.data?.userid,
+                      Password : Password,
+                      email : Email
+                  })
+                  .then(() =>{
+                    console.log(response.data);
+                    alert("User created successfuly");
+                  })
+                  .catch(() =>{
+                    console.log(response.data);
+                    alert("User created successfuly");
+                  })
           })
           .catch((e) => {
+            console.log(e);
+            
             alert("some error occured");
           });
       } else {

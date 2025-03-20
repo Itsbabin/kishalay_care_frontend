@@ -16,7 +16,7 @@ export default function Home() {
       </div>
       <div className="banner_line w-screen h-3 "></div>
       <div className="w-screen max-h-max flex justify-center gap-32 max-md:gap-2 max-xl:flex-wrap items-center max-md:p-0 py-5 max-md:px-6 px-36 mb-36">
-        <div className="relative h-96 max-md:h-40 max-md:w-80 w-[600px] max-md:mt-5 mt-20">
+        <div className="relative h-96 max-md:w-120 w-[600px] max-md:mt-1 mt-20">
           <Image
             src='/home/lady.jpg'
             fill={true}
@@ -66,7 +66,8 @@ export default function Home() {
           <div className="product_img relative h-44 w-44 max-xl:h-36 max-xl:w-36 rounded-full shadow-lg shadow-gray-400">
             <Image
               src={'/home/Nutrocitical.png'}
-              fill={true}
+              fill={true} 
+              sizes="(w-full h-full)"
               alt="Nutrocitical"
               className=' object-contain '
             />
@@ -77,7 +78,8 @@ export default function Home() {
           <div className="product_img relative h-44 w-44 max-xl:h-36 max-xl:w-36 rounded-full shadow-lg shadow-gray-400">
             <Image
               src={'/home/Herbals.png'}
-              fill={true}
+              fill={true} 
+              sizes="(w-full h-full)"
               alt="Nutrocitical"
               className=' object-contain '
             />
@@ -88,7 +90,8 @@ export default function Home() {
           <div className="product_img relative h-44 w-44 max-xl:h-36 max-xl:w-36 rounded-full shadow-lg shadow-gray-400">
             <Image
               src={'/home/Beauty Care.png'}
-              fill={true}
+              fill={true} 
+              sizes="(w-full h-full)"
               alt="Nutrocitical"
               className=' object-contain '
             />
@@ -99,7 +102,8 @@ export default function Home() {
           <div className="product_img relative h-44 w-44 max-xl:h-36 max-xl:w-36 rounded-full shadow-lg shadow-gray-400">
             <Image
               src={'/home/Personal Care.png'}
-              fill={true}
+              fill={true} 
+              sizes="(w-full h-full)"
               alt="Nutrocitical"
               className=' object-contain '
             />
@@ -110,7 +114,8 @@ export default function Home() {
           <div className="product_img relative h-44 w-44 max-xl:h-36 max-xl:w-36 rounded-full shadow-lg shadow-gray-400">
             <Image
               src={'/home/Home Care.png'}
-              fill={true}
+              fill={true} 
+              sizes="(w-full h-full)"
               alt="Nutrocitical"
               className=' object-contain '
             />
@@ -121,7 +126,8 @@ export default function Home() {
           <div className="product_img relative h-44 w-44 max-xl:h-36 max-xl:w-36 rounded-full shadow-lg shadow-gray-400">
             <Image
               src={'/home/Auto Care.png'}
-              fill={true}
+              fill={true} 
+              sizes="(w-full h-full)"
               alt="Nutrocitical"
               className=' object-contain '
             />

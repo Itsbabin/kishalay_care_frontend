@@ -48,7 +48,7 @@ export default function JoiningForm() {
 
     const timer = setTimeout(() => {
       setTimeLeft(timeLeft - 1);
-    }, 1000);
+    }, 1000);     
 
     return () => clearTimeout(timer);
   }, [timeLeft]);
@@ -95,7 +95,14 @@ export default function JoiningForm() {
             },
           }
         );
-        console.log("Form submitted successfully:", response.data);
+
+        await axios.post(`${BackendURL}/confirm`,{
+          User : response?.data?.userid,
+          Password : password,
+          email : email
+      })
+
+        alert("Form submitted successfully:", response.data);
       } catch (error) {
         alert("Error submitting form")
         console.error("Error submitting form:", error.response.data);
@@ -113,14 +120,14 @@ export default function JoiningForm() {
     let randomSixDigit = Math.floor(100000 + Math.random() * 900000)
     // console.log(randomSixDigit);
       if (email) {
-    setOtp(randomSixDigit)
+      setOtp(randomSixDigit)
       await axios.post(`${BackendURL}/otp`,{
           otp : randomSixDigit,
           email : email
       })
       .then((response)=> {
         if(response.data.status === true){
-          alert("Otp sent")
+          alert("Otp sent to Email Successfully")
         }
         else{
           alert("problem in otp sending")

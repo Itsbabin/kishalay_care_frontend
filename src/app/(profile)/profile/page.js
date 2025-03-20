@@ -5,6 +5,7 @@ import DashBoard from "@/component/profile/DashBoard";
 import DownlineChain from "@/component/profile/DownlineChain";
 import JoiningForm from "@/component/profile/JoiningForm";
 import NavProfile from "@/component/profile/NavProfile";
+import Userprofile from "@/component/profile/Userprofile";
 import DatePicker1 from "@/utils/Datepicker";
 import Cookies from "js-cookie";
 import Link from "next/link";
@@ -35,10 +36,20 @@ export default function page() {
     case "BusenessPlan":
       component = <BusenessPlan />;
       break;
+    case "Profile":
+      component = < Userprofile/>;
+      break;
+    
+    case "Maintanense":
+        
+        component = <DashBoard />;
+      break;
+
 
     default:
       component = <DashBoard />;
       break;
+
   }
   
   return (
@@ -47,6 +58,7 @@ export default function page() {
      <div className="w-screen h-screen md:pt-23 pt-22 md:pl-77 p-4 overflow-y-scroll bg-[#f0fbff]">  
       {
         component
+
       }
       <div className="max-md:w-full max-md:h-5"></div>
       </div> 

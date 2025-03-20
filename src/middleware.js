@@ -24,14 +24,22 @@ import { NextResponse } from 'next/server';
 //     return NextResponse.redirect(new URL('/login', req.url))
 //   }
   
+//   if (req.url.slice(-5) == 'stalf') {
+//     const usertype = req.cookies.get('usertype')
+//     if (usertype != undefined) {
+//       return NextResponse.next();
+//     }
+//     return NextResponse.redirect(new URL('/login', req.url))  
+//   }
+  
 //   return NextResponse.redirect(new URL('/login', req.url))
 //       // return NextResponse.next();
   
 // }
 
-// // Apply middleware to only protected routes
+// Apply middleware to only protected routes
 // export const config = {
-//   matcher: ['/profile','/admin'], // Protect /profile page
+//   matcher: ['/profile','/admin','/stalf'], // Protect /profile page
 // };
 
 export function middleware(req) {

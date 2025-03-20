@@ -32,7 +32,11 @@ return (
                 </Link>
                 <ul id="menu" className="flex space-x-2.5 md:space-x-4 h-10 mr-4 ">
                     <li className="">
-                        <Link href="#" className="text-black text-xl hover:text-gray-300">
+                        <div className="text-black text-xl cursor-pointer hover:text-gray-300"
+                         onClick={() =>{
+                            alert("This portion is under Maintanense")
+                        }}
+                        >
                         <div className="relative h-7 w-7 md:h-8 md:w-8">
                         <Image
                             src="/profile/nav/cart.png"
@@ -43,10 +47,14 @@ return (
                             className="object-contain "
                         />
                     </div>
-                        </Link>
+                        </div>
                     </li>
                     <li>
-                        <Link href="#" className="text-black text-xl hover:text-gray-300">
+                        <div  className="text-black text-xl cursor-pointer hover:text-gray-300"
+                         onClick={() =>{
+                            alert("This portion is under Maintanense")
+                        }}
+                        >
                             <div className="relative h-7 w-7 md:h-8 md:w-8">
                         <Image
                             src="/profile/nav/wallet.png"
@@ -57,10 +65,14 @@ return (
                             className="object-contain "
                         />
                     </div>
-                        </Link>
+                        </div>
                     </li>
                     <li>
-                        <Link href="#" className="text-black text-xl hover:text-gray-300">
+                        <div  className="text-black text-xl cursor-pointer hover:text-gray-300"
+                         onClick={() =>{
+                            alert("This portion is under Maintanense")
+                        }}
+                        >
                             <div className="relative h-7 w-7 md:h-8 md:w-8">
                         <Image
                             src="/profile/nav/notification.png"
@@ -71,10 +83,14 @@ return (
                             className="object-contain "
                         />
                     </div>
-                        </Link>
+                        </div>
                     </li>
                     <li>
-                        <Link href="#" className="text-black text-xl hover:text-gray-300">
+                        <div href="#" className="text-black text-xl cursor-pointer hover:text-gray-300"
+                        onClick={() =>{
+                            alert("This portion is under Maintanense")
+                        }}
+                        >
                             <div className="relative h-7 w-7 md:h-8 md:w-8">
                         <Image
                             src="/profile/nav/settings.png"
@@ -85,7 +101,7 @@ return (
                             className="object-contain "
                         />
                     </div>
-                        </Link>
+                        </div>
                     </li>
                 </ul>
             </div>
