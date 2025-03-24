@@ -201,7 +201,7 @@ setloading(false)
       <div className="flex justify-center items-start pt-10 px-8 h-full w-full overflow-scroll">
         {/*  */}
         <form
-          className="max-h-max py-8 max-md:pl-0 p-2 w-full max-md:w-[350px] rounded-4xl bg-[#1F225B] border-[#0006B8] border-2  flex max-md:flex-col justify-center items-center flex-wrap gap-4"
+          className="max-h-max py-8 max-md:pl-0 p-2 w-[900px] max-md:w-[350px] rounded-4xl bg-[#1F225B] border-[#0006B8] border-2  flex max-md:flex-col justify-center items-center flex-wrap gap-4"
           onSubmit={async (e) => {
             e.preventDefault();
             setloading(true)

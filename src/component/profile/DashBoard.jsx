@@ -11,7 +11,6 @@ export default function DashBoard() {
 
     let json = cookie ?  JSON.parse(cookie) : null ;
      setuser(json)
-     console.log(json);
   }, [])
 
   return (

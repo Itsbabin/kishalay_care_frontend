@@ -13,7 +13,7 @@ import { useState } from "react";
 
 let SetShowebleHome0;
 
-export default function page() {
+export default function Page() {
   const [ShowebleHome, setShowebleHome] = useState("DashBoard");
   SetShowebleHome0 = setShowebleHome;
   let component;
@@ -55,7 +55,7 @@ export default function page() {
   return (
     <>
      <NavProfile/>
-     <div className="w-screen h-screen md:pt-23 pt-22 md:pl-77 p-4 overflow-y-scroll bg-[#f0fbff]">  
+     <div className="w-screen h-screen md:pt-23 pt-22 md:pl-84 p-4 overflow-y-scroll bg-[#f0fbff]">  
       {
         component
 

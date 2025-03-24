@@ -12,7 +12,7 @@ export default function Navbar() {
         <div id="notification" className="h-8 w-screen bg-[#0A0037]">
             {/* <marquee behavior="alternate" direction="left" className=" text-amber-300">hello every one</marquee> */}
         </div>
-        <div className="container h-16 mx-auto flex justify-between items-center">
+        <div className="container h-16 mx-auto md:mx-16 flex justify-between items-center">
           <button
             id="menu-btn"
             className="text-black md:hidden ml-5 text-2xl  hover:bg-gray-300 duration-300 p-3 rounded-xl "

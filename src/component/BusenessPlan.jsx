@@ -226,7 +226,7 @@ export default function BusenessPlan() {
 
 ]
   return (
-    <div className="w-full max-w-6xl p-4 bg-white rounded-lg shadow">
+    <div className="w-full max-w-6xl p-4 mx-auto rounded-lg shadow">
         <h2 className="text-2xl font-semibold mb-4 text-center bg-blue-900 text-white p-3 rounded">Marketing Business & Promotion Chart</h2>
         <div className="overflow-x-auto">
             <table className="w-full border-collapse border border-gray-300 text-sm text-left">

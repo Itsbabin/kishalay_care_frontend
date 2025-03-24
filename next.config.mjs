@@ -6,8 +6,10 @@ const nextConfig = {
         remotePatterns: [{
             protocol: "https",
             hostname: "res.cloudinary.com",
-          }], // Allow Cloudinary images
+          }], 
       },
+    
 };
+
 
 export default nextConfig;

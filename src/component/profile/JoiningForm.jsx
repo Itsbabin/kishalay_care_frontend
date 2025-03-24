@@ -1,15 +1,13 @@
 "use client";
+import Cookies from "js-cookie";
 import React, { useEffect, useState } from "react";
 import Image from "next/image";
 import axios from "axios";
 import { BackendURL } from "../../../const";
-import Cookies from "js-cookie";
 import getpincode_details from "@/utils/getpincode_details";
 
 export default function JoiningForm() {
-  const [name, setName] = useState("");
-  const [sponsorCode, setSponsorCode] = useState("");
-  const [sponsorName, setSponsorName] = useState("");
+  
   const [title, setTitle] = useState("Mr.");
   const [firstName, setFirstName] = useState("");
   const [middleName, setMiddleName] = useState("");
@@ -59,7 +57,7 @@ export default function JoiningForm() {
     if (confirmColor === "bg-green-300" && user && otpMatched) {
       const formData = new FormData();
       let userData = {
-        name: title + ` ${name}` + ` ${middleName}` + " " + lastName,
+        name: title + ` ${firstName}` + ` ${middleName}` + " " + lastName,
         password: password,
         introducer: {
           id: user?.userid,
@@ -118,8 +116,9 @@ export default function JoiningForm() {
 
   let getOtp = async() => {
     let randomSixDigit = Math.floor(100000 + Math.random() * 900000)
-    // console.log(randomSixDigit);
+    console.log(randomSixDigit);
       if (email) {
+      setDisabled(true)
       setOtp(randomSixDigit)
       await axios.post(`${BackendURL}/otp`,{
           otp : randomSixDigit,
@@ -137,6 +136,9 @@ export default function JoiningForm() {
       .catch((err) =>{
           console.log(err);
       })
+    }
+    else{
+      alert("Please enter Email Id")
     }
 
     }
@@ -264,12 +266,12 @@ export default function JoiningForm() {
             <button className={`${disabled ?"bg-yellow-800":"bg-yellow-400"} ${otpMatched ?"hidden":"flex"}  px-4 py-2 h-11 rounded-[2rem] text-nowrap cursor-pointer`} disabled={disabled} 
          onClick={() => {
            getOtp();
-           setDisabled(true)
+           
           }}
     > 
       {disabled ? `Wait ${Math.floor(timeLeft / 60)}:${(timeLeft % 60).toString().padStart(2, '0')}`  : "Get OTP"}
             </button>
-            <button className="bg-green-500 px-4 py-2 h-11 rounded-[2rem] text-nowrap cursor-pointer"
+            <button className={`bg-green-500 px-4 py-2 h-11 rounded-[2rem] text-nowrap cursor-pointer ${otpMatched ?"hidden":"flex"}`}
             onClick={(e) =>{
               console.log(inputOTP);
                if (inputOTP === `${otp}`) {
