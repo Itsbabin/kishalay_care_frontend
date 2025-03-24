@@ -16,7 +16,7 @@ export default function DashBoard() {
   return (
     <>
       <div className="flex max-md:flex-col-reverse items-start justify-baseline gap-4 pb-4">
-        <div className="h-screen max-md:h-full max-w-[900px] max-md:w-full max-md:overflow-x-hidden">
+        <div className="h-screen max-md:h-full max-w-[900px] pb-8 max-md:w-full max-md:overflow-x-hidden">
           <div className="max-w-6xl mx-auto grid grid-cols-2 md:grid-cols-4 gap-4">
             <div className="bg-white p-4 rounded-lg shadow-md text-center">
               <div className="relative h-25 w-25 mx-auto">
@@ -105,8 +105,8 @@ export default function DashBoard() {
             </div>
           </div>
 
-          <div className={`max-w-6xl ${user?.juniors.length == 0 ? "hidden" : "grid"} mx-auto mt-6 grid-cols-1 md:grid-cols-2 gap-4`}>
-            <div className="bg-white p-4 rounded-lg shadow-md">
+          <div className={`max-w-6xl ${user?.juniors.length == 0 ? "hidden" : "grid"} overflow-scroll mx-auto mt-6 grid-cols-1 md:grid-cols-2 gap-4`}>
+            <div className="bg-white p-4 rounded-lg shadow-md mb-4">
               <p className="font-bold text-gray-700">
                   Direct Hand Downline
               </p>

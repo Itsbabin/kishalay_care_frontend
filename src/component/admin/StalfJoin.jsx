@@ -55,6 +55,7 @@ export default function StalfJoin({setloading}) {
           }
         );
         setloading(false)
+        window.location.reload();
         alert("Form submitted successfully:");
       } catch (error) {
         setloading(false)

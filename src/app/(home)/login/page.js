@@ -127,7 +127,7 @@ export default function Login() {
               className=" object-cover"
             />
           </div>
-          <div className="flex max-md:items-start max-md:pt-20 justify-center items-center h-screen w-screen ">
+          <div className="flex max-md:items-start max-md:pt-20 justify-center mt-24 items-center h-full w-screen ">
             <div className="h-[460px] w-[720px] max-md:w-[300px] rounded-4xl border-[#0006B8] border-2  flex max-md:flex-col  justify-center items-center">
               <div className="relative h-full w-[45%]  max-md:h-1/4">
                 <Image

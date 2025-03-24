@@ -7,7 +7,7 @@ import { BackendURL } from "../../../const";
 import getpincode_details from "@/utils/getpincode_details";
 
 export default function JoiningForm() {
-  
+  const [loading, setLoading] = useState(false)
   const [title, setTitle] = useState("Mr.");
   const [firstName, setFirstName] = useState("");
   const [middleName, setMiddleName] = useState("");
@@ -53,8 +53,12 @@ export default function JoiningForm() {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
+    setLoading(true)
     let user = JSON.parse(Cookies.get("user"))
-    if (confirmColor === "bg-green-300" && user && otpMatched) {
+  if (otpMatched) {
+ 
+    if ((confirmColor === "bg-green-300") && user ) {
+      
       const formData = new FormData();
       let userData = {
         name: title + ` ${firstName}` + ` ${middleName}` + " " + lastName,
@@ -99,9 +103,21 @@ export default function JoiningForm() {
           Password : password,
           email : email
       })
-
-        alert("Form submitted successfully:", response.data);
+      await alert("Form submitted successfully:");
+      
+      let newUserjunior = [...user.juniors,{
+        id : response.data.userid,
+        name :  response.data.name
+      }]
+      
+      user.juniors = newUserjunior
+      
+      Cookies.set('user',JSON.stringify(user),{ expires: 3 / 24, path: "/" })
+      setLoading(false)
+         
+       window.location.reload()
       } catch (error) {
+        setLoading(false)
         alert("Error submitting form")
         console.error("Error submitting form:", error.response.data);
       }
@@ -112,39 +128,47 @@ export default function JoiningForm() {
     } else {
       alert("Password does not match");
     }
+  }else{
+    alert("Please verify OTP!")
+  }
+       
   };
 
   let getOtp = async() => {
     let randomSixDigit = Math.floor(100000 + Math.random() * 900000)
     console.log(randomSixDigit);
-      if (email) {
-      setDisabled(true)
       setOtp(randomSixDigit)
-      await axios.post(`${BackendURL}/otp`,{
-          otp : randomSixDigit,
-          email : email
-      })
-      .then((response)=> {
-        if(response.data.status === true){
-          alert("Otp sent to Email Successfully")
-        }
-        else{
-          alert("problem in otp sending")
-          setDisabled(false)
-        }
-      })
-      .catch((err) =>{
-          console.log(err);
-      })
-    }
-    else{
-      alert("Please enter Email Id")
-    }
+    //   if (email) {
+    //   setDisabled(true)
+    //   await axios.post(`${BackendURL}/otp`,{
+    //       otp : randomSixDigit,
+    //       email : email
+    //   })
+    //   .then((response)=> {
+    //     if(response.data.status === true){
+    //       alert("Otp sent to Email Successfully")
+    //     }
+    //     else{
+    //       alert("problem in otp sending")
+    //       setDisabled(false)
+    //     }
+    //   })
+    //   .catch((err) =>{
+    //       console.log(err);
+    //   })
+    // }
+    // else{
+    //   alert("Please enter Email Id")
+    // }
 
     }
 
   return (
     <>
+    {
+      loading ? <div className="fixed inset-0 flex items-center justify-center bg-white/70 z-50">
+      <div className="animate-spin h-12 w-12 border-t-4 border-blue-600 rounded-full"></div>
+    </div> :
       <form
         className="bg-[#2E307B] text-white p-8 rounded-xl shadow-lg w-full max-w-4xl mx-auto mt-5"
         onSubmit={handleSubmit}
@@ -423,6 +447,7 @@ export default function JoiningForm() {
           </button>
         </div>
       </form>
+      }
     </>
   );
 }

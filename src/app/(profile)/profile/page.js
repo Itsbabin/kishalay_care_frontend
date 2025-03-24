@@ -55,7 +55,7 @@ export default function Page() {
   return (
     <>
      <NavProfile/>
-     <div className="w-screen h-screen md:pt-23 pt-22 md:pl-84 p-4 overflow-y-scroll bg-[#f0fbff]">  
+     <div className="w-screen h-screen md:pt-23 pt-22 pb-6 md:pl-84 p-4 overflow-y-scroll bg-[#f0fbff]">  
       {
         component
 

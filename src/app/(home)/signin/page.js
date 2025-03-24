@@ -10,9 +10,9 @@ import { useRouter } from "next/navigation";
 export default function Page() {
   const [referalID, setreferalID] = useState(null)
   const [referalName, setreferalName] = useState(null)
- 
+  const [loading, setLoading] = useState(false)
   
-
+  const [agree, setAgree] = useState(false)
   const [title, setTitle] = useState("Mr.");
   const [firstName, setFirstName] = useState("");
   const [middleName, setMiddleName] = useState("");
@@ -42,6 +42,7 @@ export default function Page() {
   const [Townlist, setTownlist] = useState([])
   const [TownlistHeight, setTownlistHeight] = useState("hidden")
   const [hydrated, setHydrated] = useState(false);
+  const [termsandCondition, setTermsandCondition] = useState(false)
 
    const router = useRouter();
    useEffect(() => {
@@ -72,8 +73,10 @@ export default function Page() {
   const handleSubmit = async (e) => {
     e.preventDefault();
     if (file) {
-   
+   if (agree) {
+    
     if (confirmColor === "bg-green-300" && otpMatched) {
+      setLoading(true)
       const formData = new FormData();
       let userData = {
         name: title + ` ${firstName}` + ` ${middleName}` + " " + lastName,
@@ -120,9 +123,11 @@ export default function Page() {
       })
 
         alert("Form submitted successfully:", response.data);
+        setLoading(false)
         router.push("/login");
       } catch (error) {
-        alert("Error submitting form")
+        alert(`Error submitting form ${ error.response?.data?.messeg}`)
+        setLoading(false)
         console.error("Error submitting form:", error.response.data);
       }
     }
@@ -132,6 +137,10 @@ export default function Page() {
     } else {
       alert("Password does not match");
     }
+    
+   } else{
+    alert("Agree with terms and condition")
+   }
     } else{
       alert("Please upload your Profile Picture");
     }
@@ -139,7 +148,7 @@ export default function Page() {
 
   let getOtp = async() => {
     let randomSixDigit = Math.floor(100000 + Math.random() * 900000)
-    console.log(randomSixDigit);
+    
       if (email) {
       setDisabled(true)
       setOtp(`${randomSixDigit}`)
@@ -179,7 +188,11 @@ export default function Page() {
   return (
     (referalID && referalName) ? 
     <div className='h-full w-screen flex justify-center items-start pt-6'>     
-         
+         {
+          loading ?  <div className="fixed inset-0 flex items-center justify-center bg-white/70 z-50">
+          <div className="animate-spin h-12 w-12 border-t-4 border-blue-600 rounded-full"></div>
+        </div> :
+      <>
        <form
                className="bg-[#2E307B] text-white p-8 rounded-xl shadow-lg w-full max-w-4xl mx-auto mt-5"
                onSubmit={handleSubmit}
@@ -449,16 +462,194 @@ export default function Page() {
                    readOnly
                  />
                </div>
-       
-               <div className="flex justify-center gap-5 mt-6">
+                    
+               <div className="flex flex-col justify-center gap-5 px-4 mt-6">
+                <div className="">
+                 <input type="checkbox" onClick={() =>{
+                   agree ? setAgree(false) : setAgree(true)
+                  
+                   
+                    
+                 }}/> I Agree with terms and condition
+                 </div>
+                 <div className="text-amber-200 underline cursor-pointer" onClick={() =>{
+                  setTermsandCondition(true)
+                 }}>
+                  View Terms and Condition
+                 </div>
                  <button
                    type="submit"
-                   className="bg-green-500 px-6 py-2 rounded-[2rem] text-black cursor-pointer"
+                   className={`${agree ?"bg-green-500" : "bg-gray-500" } px-6 py-2 rounded-[2rem] text-black cursor-pointer`}
                  >
                    Create
                  </button>
                </div>
              </form>
+              <div id="popup" className={` absolute top-26 left-0 h-screen w-screen bg-white ${termsandCondition ? "flex" : "hidden"} flex-col`}>
+              <div className="text-black text-2xl font-bold  p-10">
+                <div className="">Terms and conditions</div>
+              </div>
+              <div className="h-[80%] w-full bg-white text-black p-10 pb-20 overflow-scroll">
+
+                <div className="font-medium">
+                  {`This document including the Distributor Application, if fully completed, signed by the applicant(s) when duly accepted by Kishalay Care Pvt. Ltd., constitutes the Distributor Agreement (" Agreement") between Kishalay Care Pvt. Ltd., and the applicant(s) whose signature and other identification data appear overhere.`}
+                </div>
+                <div className="font-medium">
+                  {`
+                  1. 	Kishalay Care Pvt. Ltd. appoints the - identified applicant(s) as a distributor of KISHALAY CARE products and the applicant(s) (herein after individually and collectively referred to as the "Distributor") accept(s) such appointment. Distributor may, on a non-exclusive basis, purchase KISHALAY CARE products from Kishalay Care Pvt. Ltd., to resell, distribute and market in the territory of India. 
+
+                  `}
+                </div>
+                <div className="font-medium">
+                  {`
+                  2. 	Distributor hereby confirms that he/she has entered into this Agreement as an independent contractor. Nothing in this Agreement shall establish an employment relationship, or any other labour relationship between the Distributor and Kishalay Care Pvt. Ltd., and nothing shall establish the Distributor's position as procurer, broker, commercial agent, contracting representative or other representative of Kishalay Care Pvt. Ltd. When purchasing and selling KISHALAY CARE products, the Distributor shall act as an independent vendor, acting in his/her own name, at his/her own responsibility and for his/her own account. 
+
+                  `}
+                </div>
+                <div className="font-medium">
+                  {`
+                  3. 	Distributor shall not sell any KISHALAY CARE product for a price exceeding the Maximum Retail Price. Distributor may charge, at his discretion, any price that is lower than the Maximum Retail Price indicated on the label of any product or in any, then applicable, price list issued by Kishalay Care Pvt. Ltd.
+
+                  `}
+                </div>
+                <div className="font-medium">
+                  {`
+                  4. 	Relation between Kishalay Care Pvt. Ltd. and the Distributor and all his/her activities hereunder shall be governed, in addition to this Agreement, by the rules contained in the Kishalay Care Business Starter Guide which includes the 
+
+                  `}
+                </div>
+                <div className="">
+                  {`
+                  a) Kishalay Care Sales and Marketing Plan 
+
+                  `}
+                </div>
+                <div className="">
+                  {`
+                  b) Code of Ethics and Rules of Conduct (hereinafter collectively referred to as "Official Documents". The Distributor confirms that he/she has received a copy of Official Documents and has read the terms and conditions thereof and agrees to be bound by them in addition to this Agreement. Kishalay Care Pvt. Ltd. may amend from time to time, any of the terms and conditions of the Official Documents through notice on its website www.kishalaycare.com. If any Distributor does not agree to be bound by such amendment, he/she may terminate this Agreement within 45 days of such publication by giving a written notice to Kishalay Care Pvt. Ltd. Distributor's continued relationship with Kishalay Care Pvt. Ltd. would constitute an affirmative 
+
+                  `}
+                </div>
+                <div className="">
+                  {`
+                  a) acknowledgment by the Distributor of the amendment and 
+
+                  `}
+                </div>
+                <div className="">
+                  {`
+                  b) Agreement by the Distributor to abide and be bound by this Agreement, Official Documents and its modifications. 
+
+                  `}
+                </div>
+                <div className="font-medium">
+                  {`
+                  5. 	This Agreement becomes effective from the date of acceptance by Kishalay Care Pvt. Ltd. of the Applicant's contractual offer in the form of this fully completed Distributor Application form. Such acceptance shall be communicated by sending to the Distributor, a Distributor Identification Card or upon entering the particulars of the Distributor in Kishalay Care's Distributor Database, whichever is earlier. The Distributor Identification Card is and shall remain the property of Kishalay Care Pvt. Ltd. and Distributor shall return it to Kishalay Care Pvt. Ltd. without any delay upon termination or expiration of this Agreement. 
+
+                  `}
+                </div>
+                <div className="font-medium">
+                  {`
+                  6. 	The Co-Applicant/Second Authorized Representative acknowledges that Kishalay Care Pvt. Ltd. will deal exclusively with the Primary Applicant/ First Authorized Representative in respect of all business matters, and also pay commission and / or any other incentives to and in the name of the Primary Applicant/Entity. 
+
+                  `}
+                </div>
+                <div className="font-medium">
+                  {`
+                  7. 	Kishalay Care Pvt. Ltd. will make all payments on account of returns or refunds through Bank transfers /account payee cheques drawn in favour of Primary Applicant/Entity only. 
+
+                  `}
+                </div>
+                <div className="font-medium">
+                  {`
+                  8. 	The Distributor hereby expressly authorizes Kishalay Care Pvt. Ltd. to make available, release and disseminate all or part of the information set forth herein to other Kishalay Care Distributors & Customers within or outside of India. The Distributors agrees that he/she has read and understand Kishalay Care Pvt. Ltd.'s Privacy Policy as published on www.kishalaycare.com in respect of the information set forth herein or any other information provided by the distributor to Kishalay Care Pvt. Ltd. 
+
+                  `}
+                </div>
+                <div className="font-medium">
+                  {`
+                  9. 	The Distributor needs to activate the distributorship within the respective calendar month of joining by doing 1-1000 BV of personal purchases of Kishalay Care products for retailing. Failure to activate the distributorship will result in automatic termination of this agreement. 
+
+                  `}
+                </div>
+                <div className="font-medium">
+                  {`
+                  10. 	The distributor will be allowed to sponsor a prospect into the Kishalay Care business only after activating his/her distributorship. 
+
+                  `}
+                </div>
+                <div className="font-medium">
+                  {`
+                  11. 	This Agreement is effective for an initial definitive period of one (1) year, from the date of acceptance hereof by Kishalay Care Pvt. Ltd.. However, in-case of acceptance by Kishalay Care Pvt. Ltd. of the Applicant's contractual offer on or after September 1, this Agreement will be effective till December 31 of the following year. 
+
+                  `}
+                </div>
+                <div className="font-medium">
+                  {`
+                  12. 	All Distributors are required to renew their distributorships for the following year on or before December 31 of each year. Kishalay Care Pvt. Ltd. reserves the right, at its complete discretion, to reject any application for renewal. 
+
+                  `}
+                </div>
+                <div className="font-medium">
+                  {`
+                  13. 	The Distributor may terminate this Agreement at any time by giving a written notice to Kishalay Care Pvt. Ltd. Kishalay Care Pvt. Ltd. may terminate this agreement by giving a written notice (a) pursuant to the provisions of the Rules of Conduct; (b) for reasons of non-performance and (c) for the breach of any terms and conditions of this Agreement. 
+
+                  `}
+                </div>
+                <div className="font-medium">
+                  {`
+                  14. 	Kishalay Care Pvt. Ltd. may reject this application for any reason, at its discretion, including if the application contains incomplete, inaccurate, false or misleading information. Any alteration or modification will be subject to verification. 
+
+                  `}
+                </div>
+                <div className="font-medium">
+                  {`
+                  15. 	This Agreement is entered into on a personal basis and neither this Agreement nor any of the rights or obligations of Distributor arising under this Agreement may be assigned or transferred without the prior written consent of Kishalay Care Pvt. Ltd. 
+
+                  `}
+                </div>
+                <div className="font-medium">
+                  {`
+                  16. 	Kishalay Care Pvt. Ltd.'s liability, whether in contract, tort or otherwise arising out of or in connection with this agreement and/or relationship arising therefrom shall not exceed the lesser of 
+
+                  `}
+                </div>
+                <div className="">
+                  {`
+                  a) actual damages or loss assessed by the arbitrator or any other dispute resolution mechanism adopted by the parties or; 
+
+                  `}
+                </div>
+                <div className="">
+                  {`
+                  b) the total commission earned by the distributor during the preceding six months of the date of dispute. 
+
+                  `}
+                </div>
+                <div className="font-medium">
+                  {`
+                  17. 	Any dispute, differences or claim arising out of as in connection with this Agreement shall be submitted to binding arbitration and shall be referred to the sole Arbitrator appointed by Kishalay Care Pvt. Ltd. in accordance with the rules and regulation of Indian Constitution. The venue of such arbitration shall be at Ranaghat jurisdiction and the award of the Arbitrator shall be final and binding on all parties. The courts at Ranaghat jurisdiction shall alone have jurisdiction in relation to this Arbitration Agreement and any award arising therefrom.
+
+                  `}
+                </div>
+                <div className="font-medium">
+                  {`
+                  The Distributor agrees to comply with Kishalay Care Pvt. Ltd.'s Customer Product Refund Policy as laid down in the Code of Ethics & Rules of Conduct for Kishalay Care Distributors which are part of the Kishalay Care Business Starter Guide.
+
+                  `}
+                </div>
+              </div>
+              <div className="flex w-full justify-center items-center">
+                <button className="bg-gray-500 text-amber-50 px-8 py-2 rounded-2xl" onClick={() =>{
+                  setTermsandCondition(false)
+                }}>
+                  Close
+                </button>
+              </div>
+         </div>
+         </>
+
+            }
 
     </div>
     : 
