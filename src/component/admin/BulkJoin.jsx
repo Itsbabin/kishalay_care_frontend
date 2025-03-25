@@ -64,7 +64,7 @@ export default function BulkJoin({setloading}) {
     setloading(true)
     if (agents.length != 0) {
       axios
-        .post(`${BackendURL}/admin/bulkJoin`, { agents })
+        .post(`${BackendURL}/admin/bulkJoin`, { agents : JSON.stringify(agents) })
         .then((res) => {
           console.log(res.data);
           alert("Successfully user created!")

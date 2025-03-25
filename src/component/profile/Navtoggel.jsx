@@ -93,7 +93,7 @@ export default function Navtoggel({ setToggel }) {
           <Image
             src="/profile/nav/Busenessplan.png"
             fill={true}
-            sizes="( h-full)"
+            sizes="(h-full)"
             alt="team"
             className=" object-contain"
           />

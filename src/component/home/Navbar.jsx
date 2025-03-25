@@ -15,7 +15,7 @@ export default function Navbar() {
         <div className="container h-16 mx-auto md:mx-16 flex justify-between items-center">
           <button
             id="menu-btn"
-            className="text-black md:hidden ml-5 text-2xl  hover:bg-gray-300 duration-300 p-3 rounded-xl "
+            className="text-black md:hidden ml-5 text-2xl hover:bg-gray-300 duration-300 p-3 rounded-xl "
             onClick={() => {
               toggel === "w-0 p-0" ? setToggel("w-screen  p-4") : setToggel("w-0 p-0");
             }}
@@ -56,7 +56,7 @@ export default function Navbar() {
               </Link>
             </li>
           </ul>
-          <Link href={'/login'} className="flex justify-between items-center space-x-2 md:mr-0 mr-7">
+          <Link href={'/login'} className="flex justify-between items-center space-x-2 mr-7 md:mr-30">
           <span>Login </span>
         <div className="h-8 w-8 ">
           <img src="/home/nav/8847419.png" alt="login" />
