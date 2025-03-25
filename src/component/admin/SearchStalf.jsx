@@ -50,11 +50,11 @@ export default function SearchAgent() {
     <div className="h-full w-full flex flex-col justify-baseline items-center gap-6 ">
         <div className="">Search Office Stalfs</div>
       
-      <input type="text" className='mt-14 shadow-lg rounded-xl w-70 h-10 bg-gray-100 placeholder:text-gray-700 px-4' placeholder='Search Phone number , User ID or Name ' onChange={(e)=>{
+      <input type="text" className='mt-14 shadow-lg rounded-xl w-70 h-16  bg-gray-100 placeholder:text-gray-700 px-4' placeholder='Search Phone number , User ID or Name ' onChange={(e)=>{
         setAgentSearchData(e.target.value)
       }} />
         <div className="">Matched Search Results </div>
-      <div className="flex justify-center items-center flex-wrap space-x-1 w-full h-96  overflow-y-scroll gap-3 bg-blue-100 p-4">
+      <div className="flex justify-center items-center flex-wrap space-x-1 w-full h-150  overflow-y-scroll gap-3 bg-blue-100 p-4">
       {
         SearchResult.map((e) =>{
           return (
