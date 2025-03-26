@@ -7,6 +7,7 @@ import { BackendURL } from "../../../const";
 import getpincode_details from "@/utils/getpincode_details";
 
 export default function JoiningForm() {
+  const [passwordShow, setPasswordShow] = useState(false)
   const [loading, setLoading] = useState(false)
   const [title, setTitle] = useState("Mr.");
   const [firstName, setFirstName] = useState("");
@@ -136,30 +137,30 @@ export default function JoiningForm() {
 
   let getOtp = async() => {
     let randomSixDigit = Math.floor(100000 + Math.random() * 900000)
-    console.log(randomSixDigit);
+    
       setOtp(randomSixDigit)
-    //   if (email) {
-    //   setDisabled(true)
-    //   await axios.post(`${BackendURL}/otp`,{
-    //       otp : randomSixDigit,
-    //       email : email
-    //   })
-    //   .then((response)=> {
-    //     if(response.data.status === true){
-    //       alert("Otp sent to Email Successfully")
-    //     }
-    //     else{
-    //       alert("problem in otp sending")
-    //       setDisabled(false)
-    //     }
-    //   })
-    //   .catch((err) =>{
-    //       console.log(err);
-    //   })
-    // }
-    // else{
-    //   alert("Please enter Email Id")
-    // }
+      if (email) {
+      setDisabled(true)
+      await axios.post(`${BackendURL}/otp`,{
+          otp : randomSixDigit,
+          email : email
+      })
+      .then((response)=> {
+        if(response.data.status === true){
+          alert("Otp sent to Email Successfully")
+        }
+        else{
+          alert("problem in otp sending")
+          setDisabled(false)
+        }
+      })
+      .catch((err) =>{
+          console.log(err);
+      })
+    }
+    else{
+      alert("Please enter Email Id")
+    }
 
     }
 
@@ -287,17 +288,18 @@ export default function JoiningForm() {
             required
           />
           <div className="flex space-x-2">
-            <button className={`${disabled ?"bg-yellow-800":"bg-yellow-400"} ${otpMatched ?"hidden":"flex"}  px-4 py-2 h-11 rounded-[2rem] text-nowrap cursor-pointer`} disabled={disabled} 
-         onClick={() => {
+            <button type="button" className={`${disabled ?"bg-yellow-800":"bg-yellow-400"} ${otpMatched ?"hidden":"flex"}  px-4 py-2 h-11 rounded-[2rem] text-nowrap cursor-pointer`} disabled={disabled} 
+         onClick={(e) => {
+          e.preventDefault();
            getOtp();
            
           }}
     > 
       {disabled ? `Wait ${Math.floor(timeLeft / 60)}:${(timeLeft % 60).toString().padStart(2, '0')}`  : "Get OTP"}
             </button>
-            <button className={`bg-green-500 px-4 py-2 h-11 rounded-[2rem] text-nowrap cursor-pointer ${otpMatched ?"hidden":"flex"}`}
+            <button type="button" className={`bg-green-500 px-4 py-2 h-11 rounded-[2rem] text-nowrap cursor-pointer ${otpMatched ?"hidden":"flex"}`}
             onClick={(e) =>{
-              console.log(inputOTP);
+              e.preventDefault()
                if (inputOTP === `${otp}`) {
                  alert("otp matched")
                  setOtpReadonly(true)
@@ -312,25 +314,40 @@ export default function JoiningForm() {
           </div>
           <div className=""></div>
           <input
-            type="password"
-            placeholder="Enter Password"
-            className=" px-6 p-2 h-11 rounded-[2rem] bg-white text-black"
-            required
-            onChange={(e) => setPassword(e.target.value)}
-          />
-          <input
-            type="password"
-            placeholder="Confirm Password"
-            className={` px-6 p-2 h-11 rounded-[2rem] ${confirmColor} text-black`}
-            required
-            onChange={(e) => {
-              if (e.target.value == password) {
-                setConfirmColor("bg-green-300");
-              } else {
-                setConfirmColor("bg-red-300");
-              }
-            }}
-          />
+                  type={passwordShow ? "text" : "password"}
+                  placeholder="Enter Password"
+                  className=" px-6 p-2 h-11 rounded-[2rem] bg-white text-black"
+                  required
+                  onChange={(e) => setPassword(e.target.value)}
+                />
+                <input
+                  type={passwordShow ? "text" : "password"}
+                  placeholder="Confirm Password"
+                  className={` px-6 p-2 h-11 rounded-[2rem] ${confirmColor} text-black`}
+                  required
+                  onChange={(e) => {
+                    if (e.target.value == password) {
+                      setConfirmColor("bg-green-300");
+                    } else {
+                      setConfirmColor("bg-red-300");
+                    }
+                  }}
+                />
+
+                <div className="flex items-center">
+                  <input
+                    type="checkbox"
+                    name=""
+                    className="mr-2"
+                    id=""
+                    onChange={() => {
+                      passwordShow
+                        ? setPasswordShow(false)
+                        : setPasswordShow(true);
+                    }}
+                  />{" "}
+                  {passwordShow ? `Hide` : "Show"} password
+                </div>
         </div>
 
         <h3 className="text-xl font-bold mt-4">Address</h3>
@@ -345,28 +362,19 @@ export default function JoiningForm() {
           />
           <input
             type="text"
-            placeholder="Flat, House No, Building, Apartment"
+            placeholder="Flat, House No, Building (optional)"
             className="px-6 p-2 rounded-[2rem] bg-white text-black"
             value={address}
             onChange={(e) => setAddress(e.target.value)}
-            required
           />
           <input
             type="text"
-            placeholder="Village, Area, Street, Sector"
+            placeholder="Village, Area, Street, Sector (optional)"
             className="px-6 p-2 rounded-[2rem]  bg-white text-black"
             value={village}
             onChange={(e) => setVillage(e.target.value)}
-            required
           />
-          <input
-            type="text"
-            placeholder="Post Office"
-            className="px-6 p-2 rounded-[2rem] bg-white text-black"
-            value={postOffice}
-            onChange={(e) => setPostOffice(e.target.value)}
-            required
-          />
+         
           <input
             type="text"
             placeholder="Police Station"

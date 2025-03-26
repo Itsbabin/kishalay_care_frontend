@@ -39,8 +39,8 @@ export default function Login() {
         },
       })
         .then((result) => {
-          Cookies.set("jwt", result.data.token, { expires: 3 / 24, path: "/" });
-          Cookies.set("usertype", "stalf", { expires: 3 / 24, path: "/" });
+          Cookies.set("jwt", result.data.token, { expires: 6 / 24, path: "/" });
+          Cookies.set("usertype", "stalf", { expires: 6 / 24, path: "/" });
           Cookies.set("user", JSON.stringify(result.data), {
             expires: 3 / 24,
             path: "/",
@@ -66,18 +66,24 @@ export default function Login() {
         },
       })
         .then((result) => {
-          Cookies.set("jwt", result.data.token, { expires: 3 / 24, path: "/" });
-          Cookies.set("user", JSON.stringify(result.data), {
-            expires: 3 / 24,
+          Cookies.set("jwt", result.data.token, { expires: 1 / 24, path: "/" });
+          Cookies.set("userid", JSON.stringify(result.data.userid), {
+            expires: 1 / 24,
             path: "/",
           });
+          Cookies.set("user", JSON.stringify(result.data.user), {
+            expires: 1 / 24,
+            path: "/",
+          });
+          Cookies.set("usertype", "user", { expires: 1 / 24, path: "/" });
           alert("Login Successfull");
           router.push("/profile");
         })
         .catch((err) => {
           setLoading(false);
-          console.log(err.response?.data.message);
-          alert(err.response?.data.message);
+          console.log(err.response?.data);
+          err.response?.data.message ? 
+          alert(err.response?.data?.message) : alert("Input with right Credential !")
         });
     } else if (isNaN(valid)) {
       await axios(`${BackendURL}/admin/login`, {
@@ -94,13 +100,14 @@ export default function Login() {
         .then((result) => {
           Cookies.set("jwt", result.data.token, { expires: 3 / 24, path: "/" });
           Cookies.set("user", "admin", { expires: 3 / 24, path: "/" });
+          Cookies.set("usertype", "admin", { expires: 3 / 24, path: "/" });
           alert("Login Successfull");
           router.push("/admin");
         })
         .catch((err) => {
           setLoading(false);
-          // console.log(err.response.data);
           alert("Input right credential");
+          // console.log(err.response.data);
         });
     }
   };
@@ -167,6 +174,7 @@ export default function Login() {
                   placeholder="Enter Your User ID or Mobile Number"
                   className="bg-white  rounded-xl h-8 w-5/6 px-4"
                   type="text"
+                  value={userid}
                   onChange={(e) => {
                     setuserid(e.target.value);
                   }}
@@ -188,7 +196,9 @@ export default function Login() {
                   placeholder="Enter Your Password"
                   className="bg-white  rounded-xl h-8 w-5/6 px-4"
                   type="text"
+                  value={Password}
                   onChange={(e) => {
+                    
                     setPassword(e.target.value);
                   }}
                 />

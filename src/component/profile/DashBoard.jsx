@@ -2,15 +2,43 @@
 import React, { use, useEffect, useState } from 'react'
 import Image from "next/image";
 import Cookies from 'js-cookie';
+import axios from 'axios';
+import { BackendURL } from '../../../const';
 
 export default function DashBoard() {
   const [user, setuser] = useState(null)
 
-  useEffect(() => {
-    let cookie = Cookies.get('user')
 
+  let getUser = async (userid) =>{
+     
+    await axios
+    .post(
+      `${BackendURL}/user/search`,
+      {
+        phone_number: userid,
+      }
+    )
+    .then((response) => {
+      console.log(response.data?.message[0].juniors);
+      // setuser(response.data?.message[0])
+       Cookies.set("user", JSON.stringify(response.data?.message[0]), {
+                  expires: 1 / 24,
+                  path: "/",
+                });
+    })
+    .catch((err) => {
+      setuser(null)
+    });
+    
+
+  }
+
+  useEffect(() => {
+    let cookie = Cookies.get('userid')
     let json = cookie ?  JSON.parse(cookie) : null ;
-     setuser(json)
+
+    getUser(json) 
+      
   }, [])
 
   return (
@@ -105,7 +133,7 @@ export default function DashBoard() {
             </div>
           </div>
 
-          <div className={`max-w-6xl ${user?.juniors.length == 0 ? "hidden" : "grid"} overflow-scroll mx-auto mt-6 grid-cols-1 md:grid-cols-2 gap-4`}>
+          <div className={`max-w-6xl ${user?.juniors?.length == 0 ? "hidden" : "grid"} overflow-scroll mx-auto mt-6 grid-cols-1 md:grid-cols-2 gap-4`}>
             <div className="bg-white p-4 rounded-lg shadow-md mb-4">
               <p className="font-bold text-gray-700">
                   Direct Hand Downline

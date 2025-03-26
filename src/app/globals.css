@@ -139,14 +139,11 @@
 
   @media (width < 48rem ) {
     
-    input[type="date"]:before {
+    .Date:before {
       content: attr(placeholder) !important;
       color: #6f6f6f;
       font-size: small;
       margin-right: 0.5em;
     }
-    input[type="date"]:focus:before,
-    input[type="date"]:valid:before {
-      content: "hello";
-    }
+    
   }

@@ -23,7 +23,7 @@ export default function Userprofile() {
       component = <EditProfile setLoading={setLoading}/>;
       break;
     case "settings":
-      component = <SettingsProfile  />;
+      component = <SettingsProfile />;
       break;
 
     case "kyc":

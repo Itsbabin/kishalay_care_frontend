@@ -2,7 +2,7 @@ import { NextResponse } from 'next/server';
 
 export function middleware(req) {
   const token = req.cookies.get('jwt');
-  const user = req.cookies.get('user')
+  const usertype = req.cookies.get('usertype')
   console.log(req.url.slice(-5))
   if (!token) {
     return NextResponse.redirect(new URL('/login', req.url)); // Redirect to login
@@ -10,22 +10,22 @@ export function middleware(req) {
 
   if (req.url.slice(-5) === 'admin') {
 
-    if (user.value === "admin") {
+    if (usertype === "admin") {
       return NextResponse.next();
     }
     return NextResponse.redirect(new URL('/login', req.url))
   }
   if (req.url.slice(-7) == 'profile') {
 
-    if (user.value != "admin") {
+    if (usertype != "user") {
       return NextResponse.next();
     }
     return NextResponse.redirect(new URL('/login', req.url))
   }
   
   if (req.url.slice(-5) == 'stalf') {
-    const usertype = req.cookies.get('usertype')
-    if (usertype != undefined) {
+   
+    if (usertype == "stalf") {
       return NextResponse.next();
     }
     return NextResponse.redirect(new URL('/login', req.url))  
