@@ -45,8 +45,9 @@ export default function Login() {
             expires: 3 / 24,
             path: "/",
           });
-          alert("Login Successfull");
           router.push("/stalf");
+          setLoading(false);
+          alert("Login Successfull");
         })
         .catch((err) => {
           setLoading(false);
@@ -76,8 +77,9 @@ export default function Login() {
             path: "/",
           });
           Cookies.set("usertype", "user", { expires: 1 / 24, path: "/" });
-          alert("Login Successfull");
           router.push("/profile");
+          alert("Login Successfull");
+          setLoading(false);
         })
         .catch((err) => {
           setLoading(false);
@@ -98,16 +100,18 @@ export default function Login() {
         },
       })
         .then((result) => {
+          console.log(result);
+          
           Cookies.set("jwt", result.data.token, { expires: 3 / 24, path: "/" });
           Cookies.set("user", "admin", { expires: 3 / 24, path: "/" });
           Cookies.set("usertype", "admin", { expires: 3 / 24, path: "/" });
-          alert("Login Successfull");
           router.push("/admin");
+          alert("Login Successfull");
+          setLoading(false);
         })
         .catch((err) => {
           setLoading(false);
           alert("Input right credential");
-          // console.log(err.response.data);
         });
     }
   };
