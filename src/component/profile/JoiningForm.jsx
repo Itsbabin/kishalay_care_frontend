@@ -54,12 +54,11 @@ export default function JoiningForm() {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-    setLoading(true)
     let user = JSON.parse(Cookies.get("user"))
-  if (otpMatched) {
- 
-    if ((confirmColor === "bg-green-300") && user ) {
+    if (otpMatched) {
       
+      if ((confirmColor === "bg-green-300") && user ) {
+        
       const formData = new FormData();
       let userData = {
         name: title + ` ${firstName}` + ` ${middleName}` + " " + lastName,
@@ -87,7 +86,7 @@ export default function JoiningForm() {
       formData.append("json", JSON.stringify(userData));
       if (file) {
         formData.append("profilePic", file);
-      
+        setLoading(true)
       try {
         const response = await axios.post(
           `${BackendURL}/user/singup`,
@@ -254,9 +253,16 @@ export default function JoiningForm() {
 
           <input
             type="date"
-            className=" px-6 p-2 rounded-[2rem] max-md:w-full bg-white text-black placeholder:text-sm"
+           className={`${
+              dob ? "" : "Date"
+            } px-6 p-2 rounded-[2rem] max-md:w-full bg-white text-black placeholder:text-sm`}
             value={dob}
-            onChange={(e) => setDob(e.target.value)}
+            onChange={(e) => {
+              console.log();
+              console.log(dob);
+
+              setDob(e.target.value);
+            }}
             required
             placeholder="Enter Date of Birth"
           />

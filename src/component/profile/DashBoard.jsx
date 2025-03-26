@@ -19,8 +19,8 @@ export default function DashBoard() {
       }
     )
     .then((response) => {
-      console.log(response.data?.message[0].juniors);
-      // setuser(response.data?.message[0])
+      // console.log(response.data?.message[0].juniors);
+      setuser(response.data?.message[0])
        Cookies.set("user", JSON.stringify(response.data?.message[0]), {
                   expires: 1 / 24,
                   path: "/",
@@ -36,7 +36,8 @@ export default function DashBoard() {
   useEffect(() => {
     let cookie = Cookies.get('userid')
     let json = cookie ?  JSON.parse(cookie) : null ;
-
+      console.log(user);
+      
     getUser(json) 
       
   }, [])

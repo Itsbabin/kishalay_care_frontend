@@ -56,8 +56,8 @@ let updatePassword = async () =>{
 }
 
   return (
-    <div className='w-full h-max flex gap-6 flex-wrap justify-center items-center pt-8'>
-        <div className="w-[450px] h-max p-3 rounded-xl border-blue-200 border-6 shadow-xl ">
+    <div className='w-full h-max flex gap-6 flex-wrap justify-center items-center pt-8 '>
+        <div className="w-[340px] md:w-[420px] h-max p-3 mx-2 rounded-xl border-blue-200 border-6 shadow-xl ">
             <div className="font-semibold">
                 Name : {`${user?.name}`}
             </div>
