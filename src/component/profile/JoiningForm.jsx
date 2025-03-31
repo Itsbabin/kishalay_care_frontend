@@ -136,17 +136,19 @@ export default function JoiningForm() {
 
   let getOtp = async() => {
     let randomSixDigit = Math.floor(100000 + Math.random() * 900000)
-    
       setOtp(randomSixDigit)
-      if (email) {
+      if (firstName) {
+        
+      if (mobileNumber && mobileNumber.length == 10 && !isNaN(mobileNumber)) {
       setDisabled(true)
       await axios.post(`${BackendURL}/otp`,{
           otp : randomSixDigit,
-          email : email
+          phone_number : mobileNumber,
+          name : firstName
       })
       .then((response)=> {
         if(response.data.status === true){
-          alert("Otp sent to Email Successfully")
+          alert(" Otp senD Successfully")
         }
         else{
           alert("problem in otp sending")
@@ -158,9 +160,12 @@ export default function JoiningForm() {
       })
     }
     else{
-      alert("Please enter Email Id")
+      alert("Please enter Phone Number")
     }
-
+  }
+  else{
+    alert("Please Enter Name")
+  }
     }
 
   return (

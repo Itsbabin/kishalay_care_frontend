@@ -146,19 +146,23 @@ export default function Page() {
     }
   };
 
-  let getOtp = async (e) => {
-    e.preventDefault();
-    let randomSixDigit = Math.floor(100000 + Math.random() * 900000);
-    if (email) {
+  let getOtp = async(e) => {
+    e.preventDefault()
+    let randomSixDigit = Math.floor(100000 + Math.random() * 900000)
+    
+      setOtp(randomSixDigit)
+      if (firstName) {
+        
+      if (mobileNumber && mobileNumber.length == 10 && !isNaN(mobileNumber)) {
       setDisabled(true)
-      setOtp(`${randomSixDigit}`);
       await axios.post(`${BackendURL}/otp`,{
           otp : randomSixDigit,
-          email : email
+          phone_number : mobileNumber,
+          name : firstName
       })
       .then((response)=> {
         if(response.data.status === true){
-          alert("Otp sent to Email Successfully")
+          alert(" Otp send Successfully")
         }
         else{
           alert("problem in otp sending")
@@ -168,10 +172,16 @@ export default function Page() {
       .catch((err) =>{
           console.log(err);
       })
-    } else {
-      alert("Please enter Email Id");
     }
-  };
+    else{
+      alert("Please enter Phone Number")
+    }
+  }
+  else{
+    alert("Please Enter Name")
+  }
+    }
+
 
   if (!hydrated) {
     return null;

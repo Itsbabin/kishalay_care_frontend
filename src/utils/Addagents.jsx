@@ -76,14 +76,17 @@ export default function AddAgent({setloading}) {
     let randomSixDigit = Math.floor(100000 + Math.random() * 900000);
     console.log(randomSixDigit);
     setOtp(`${randomSixDigit}`);
-    if (Email) {
+    if (Name) {
+    if (MobileNo && MobileNo.length == 10 && !isNaN(MobileNo)) {
         await axios.post(`${BackendURL}/otp`,{
             otp : `${randomSixDigit}`,
-            email : Email
+            phone_number : MobileNo,
+            name : Name
         })
         .then((response)=> {
           if(response.data.status === true){
-            alert("Otp sent")
+            
+          alert(" Otp send Successfully")
           }
           else{
             alert("problem in otp sending")
@@ -94,6 +97,13 @@ export default function AddAgent({setloading}) {
             console.log(err);
         })
     }
+    else{
+      alert("Enter Mobile Number")
+    }
+  }
+  else{
+    alert("Please enter Name")
+  }
   };
 
  useEffect(() => {
@@ -409,7 +419,9 @@ setloading(false)
             <div className="flex justify-center items-center ">
               <input
                 required
-                type="text"
+                type="tel"
+                maxLength={10}
+                minLength={10}
                 placeholder="Enter Mobile Number "
                 className="bg-white rounded-xl h-8 w-62 px-4"
                 onChange={(e) => {
