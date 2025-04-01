@@ -99,9 +99,10 @@ export default function JoiningForm() {
         );
 
         await axios.post(`${BackendURL}/confirm`,{
-          User : response?.data?.userid,
-          Password : password,
-          email : email
+          userid : response?.data?.userid,
+          password : password,
+          phone_number : mobileNumber,
+          name: title + ` ${firstName}` + ` ${middleName}` + " " + lastName,
       })
       await alert("Form submitted successfully:");
       

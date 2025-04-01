@@ -174,9 +174,10 @@ export default function AddAgent({setloading}) {
           })
           .then(async (response) => {
              await axios.post(`${BackendURL}/confirm`,{
-                      User : response?.data?.userid,
-                      Password : Password,
-                      email : Email
+                      userid : response?.data?.userid,
+                      password : Password,
+                      phone_number : MobileNo,
+                      name: Pronoun + ` ${Name}` + ` ${middleName}` + " " + LastName,
                   })
                   .then(() =>{
                     console.log(response.data);

@@ -210,9 +210,9 @@ export default function Login() {
                   <div className="text-white  max-md:text-sm max-md:my-2">
                     <input type="checkbox" name="" id="" /> Remember me
                   </div>
-                  <div className="text-[#FFF000] max-md:text-sm max-md:my-2 underline ">
+                  <Link href={'/forgetPassword'} className="text-[#FFF000] max-md:text-sm max-md:my-2 underline  cursor-pointer">
                     forget Password
-                  </div>
+                  </Link>
                 </div>
                 <button
                   type="submit"
